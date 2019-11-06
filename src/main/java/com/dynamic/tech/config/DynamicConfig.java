@@ -30,7 +30,7 @@ public class DynamicConfig {
 
 //	@Primary
 //	@Bean(name = "dynamicDataSource")
-//	@ConfigurationProperties(prefix = "spring.dynamicdatasource")
+//	@ConfigurationProperties(prefix = "spring.datasource")
 //	public DataSource dataSource() {
 //		return DataSourceBuilder.create().build();
 //	}
