@@ -12,7 +12,7 @@ spring:
   datasource:
     url: jdbc:mysql://steve-7da8a:australia-southeast1:laundrydb:3306/laundry?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: mysql.sys 
+    username: mysql.sys
     password: root
     naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   jpa:
