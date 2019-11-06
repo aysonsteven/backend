@@ -1,14 +1,18 @@
 spring:
+  datasource:
+    data-username: root
+    data-password: root
   cloud:
+    
     gcp:
-      config:
-        project-id: steve-7da8a
+      project-id: steve-7da8a   
       sql:
         database-name: laundry
         instance-connection-name: steve-7da8a:australia-southeast1:laundrydb
-        userName: root
-        password: root
+        
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
