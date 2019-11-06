@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active:
+    - dev
+  main:
+    allow-bean-definition-overriding: true
+
+---
+
+spring:
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/l?createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: root
+    naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+server:
+  port: 9090
+  
+  
+---
+
+spring:
+  profiles: uat
+  orddatasource:
+    jdbc-url: jdbc:mariadb://crmdev01.cxdnunmy8ldc.ap-southeast-1.rds.amazonaws.com/crmquote?useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: crmquote_appl
+    password: crmquote_appl
+  eavdatasource:
+    jdbc-url: jdbc:mariadb://crmdev01.cxdnunmy8ldc.ap-southeast-1.rds.amazonaws.com/crmeav?useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: crmquote_appl
+    password: crmquote_appl
+  jpa.hibernate:
+    ddl-auto: none
+    show-sql: true
+    naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+server:
+  port: 9090
+        
