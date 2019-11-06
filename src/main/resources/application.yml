@@ -1,7 +1,7 @@
 spring:
   datasource:
-    data-username: root
-    data-password: root
+    username: root
+    password: root
   cloud:
     
     gcp:
