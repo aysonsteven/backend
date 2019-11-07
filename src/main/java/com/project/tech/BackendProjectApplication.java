@@ -1,13 +1,13 @@
-package com.dynamic.tech;
+package com.project.tech;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DynamicProjectApplication {
+public class BackendProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DynamicProjectApplication.class, args);
+		SpringApplication.run(BackendProjectApplication.class, args);
 	}
 
 }
