@@ -8,7 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbluser")
+@Table(name = "user")
 public class TblUser {
 
     public List<TblTokens> getTokens() {
