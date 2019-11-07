@@ -11,8 +11,6 @@ spring:
         instance-connection-name: steve-7da8a:australia-southeast1:laundrydb
         
   jpa:
-    hibernate:
-      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
