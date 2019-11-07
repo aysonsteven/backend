@@ -11,14 +11,6 @@ import javax.persistence.*;
 @Table(name = "users")
 public class TblUser {
 
-    public List<TblTokens> getTokens() {
-		return tokens;
-	}
-
-	public void setTokens(List<TblTokens> tokens) {
-		this.tokens = tokens;
-	}
-
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="uid")
