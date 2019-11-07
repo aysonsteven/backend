@@ -35,11 +35,6 @@ public class TblUser {
 
     @Column
     private int age;
-
-
-    @OneToMany
-    @JoinColumn(name = "user_id", referencedColumnName = "uid", insertable = false, updatable = false)
-    private  List<TblTokens> tokens;
     
     @Column(name="active")
     private Integer isActive;
