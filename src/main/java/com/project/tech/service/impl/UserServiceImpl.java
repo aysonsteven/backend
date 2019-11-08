@@ -1,12 +1,21 @@
 package com.project.tech.service.impl;
 
 import com.project.tech.dao.UserDao;
+import com.project.tech.dto.ApiResponse;
+import com.project.tech.dto.AuthToken;
+import com.project.tech.dto.LoginUser;
+import com.project.tech.dto.TokenDto;
 import com.project.tech.dto.UserDto;
 import com.project.tech.model.TblUser;
+import com.project.tech.service.TokenService;
 import com.project.tech.service.UserService;
 
+import jar.security.config.JwtTokenUtil;
+
+import org.hibernate.annotations.ResultCheckStyle;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +34,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@Autowired()
 	private BCryptPasswordEncoder bcryptEncoder;
@@ -82,5 +97,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		newUser.setAge(user.getAge());
 		return userDao.save(newUser);
+	}
+
+	@Override
+	public ApiResponse<AuthToken> login(LoginUser loginUser) {
+		final TblUser user = findOne(loginUser.getUsername());
+		final String token = jwtTokenUtil.generateToken(user.getUsername());
+		TokenDto tokenObject = new TokenDto();
+		tokenObject.setToken(token);
+		ApiResponse<String> result = tokenService.inserTokens(tokenObject, user.getId());
+		return new ApiResponse<AuthToken>(result.getStatus(), result.getMessage(),
+				new AuthToken(token, loginUser.getUsername()));
 	}
 }

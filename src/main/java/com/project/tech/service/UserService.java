@@ -1,5 +1,8 @@
 package com.project.tech.service;
 
+import com.project.tech.dto.ApiResponse;
+import com.project.tech.dto.AuthToken;
+import com.project.tech.dto.LoginUser;
 import com.project.tech.dto.UserDto;
 import com.project.tech.model.TblUser;
 
@@ -16,4 +19,6 @@ public interface UserService {
     TblUser findById(int id);
 
     UserDto update(UserDto userDto);
+    
+    ApiResponse<AuthToken> login(LoginUser loginUser);
 }

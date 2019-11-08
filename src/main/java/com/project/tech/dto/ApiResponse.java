@@ -1,12 +1,14 @@
 package com.project.tech.dto;
 
+import org.springframework.http.HttpStatus;
+
 public class ApiResponse<T> {
 
     private int status;
-    private String message;
+    private HttpStatus message;
     private T result;
 
-    public ApiResponse(int status, String message, T result) {
+    public ApiResponse(int status, HttpStatus message, T result) {
         this.status = status;
         this.message = message;
         this.result = result;
@@ -20,11 +22,11 @@ public class ApiResponse<T> {
         this.status = status;
     }
 
-    public String getMessage() {
+    public HttpStatus getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(HttpStatus message) {
         this.message = message;
     }
 

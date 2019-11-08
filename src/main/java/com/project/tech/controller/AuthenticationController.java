@@ -28,9 +28,6 @@ public class AuthenticationController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired(required = false)
-	private JwtTokenUtil jwtTokenUtil;
-
-	@Autowired(required = false)
 	private UserService userService;
 
 	@Autowired(required = false)
@@ -45,18 +42,13 @@ public class AuthenticationController {
 	public ApiResponse<AuthToken> login(@RequestBody LoginUser loginUser) throws AuthenticationException {
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
-		final TblUser user = userService.findOne(loginUser.getUsername());
-		final String token = jwtTokenUtil.generateToken(user.getUsername());
-		TokenDto tokenObject = new TokenDto();
-		tokenObject.setToken(token);
-		return new ApiResponse<>(HttpStatus.OK.value(), tokenService.inserTokens(tokenObject, user.getId()),
-				new AuthToken(token, loginUser.getUsername()));
+		return userService.login(loginUser);
 	}
 	
 	@DeleteMapping("/logout")
 	public ApiResponse<String> logout(@RequestHeader(value="Authorization") String token){
 		String tokenObject = tokenService.deleteTokenByTokenName(token.replaceAll("Bearer ", ""));
-		return new ApiResponse<>(HttpStatus.OK.value(), "deleted", tokenObject);
+		return new ApiResponse<>(HttpStatus.OK.value(), HttpStatus.OK , tokenObject);
 	}
 	
 	@GetMapping("/checklogin")
@@ -66,7 +58,7 @@ public class AuthenticationController {
 		if( tokenObject != null ) {
 			isTokenValid = true;
 		}
-		return new ApiResponse<>(HttpStatus.OK.value(), "Login Status", isTokenValid);
+		return new ApiResponse<>(HttpStatus.OK.value(), HttpStatus.OK, isTokenValid);
 	}
 
 }

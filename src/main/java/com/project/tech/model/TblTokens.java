@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tokens")
+@Table(name = "tbl_tokens")
 public class TblTokens {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
