@@ -53,12 +53,7 @@ public class AuthenticationController {
 	
 	@GetMapping("/checklogin")
 	public ApiResponse<Boolean> checklogin( @RequestHeader(value="Authorization") String token){
-		TblTokens tokenObject = tokenService.findTokenByName( token.replaceAll("Bearer ", ""));
-		Boolean isTokenValid = false;
-		if( tokenObject != null ) {
-			isTokenValid = true;
-		}
-		return new ApiResponse<>(HttpStatus.OK.value(), HttpStatus.OK, isTokenValid);
+		return tokenService.checkLogin(token);
 	}
 
 }

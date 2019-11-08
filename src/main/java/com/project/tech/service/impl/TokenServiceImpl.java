@@ -9,13 +9,16 @@ import com.project.tech.dto.ApiResponse;
 import com.project.tech.dto.TokenDto;
 import com.project.tech.model.TblTokens;
 import com.project.tech.service.TokenService;
+
 @Service
-public class TokenServiceImpl implements TokenService{
-	@Autowired TokenDao tokenDao;
+public class TokenServiceImpl implements TokenService {
+	@Autowired
+	TokenDao tokenDao;
+
 	@Override
 	public ApiResponse<String> inserTokens(TokenDto token, int uid) {
 		ApiResponse<String> response;
-		System.out.println("tokeeeen->>"+token.getToken());
+		System.out.println("tokeeeen->>" + token.getToken());
 		try {
 			TblTokens tokenObject = new TblTokens();
 			tokenObject.setToken(token.getToken());
@@ -30,24 +33,44 @@ public class TokenServiceImpl implements TokenService{
 		}
 		return response;
 	}
+
 	@Override
 	public TblTokens findTokenByName(String tokenname) {
-		System.out.println("tokitok -> "+ tokenname);
-		
+		System.out.println("tokitok -> " + tokenname);
+
 //		System.out.println("TOKEN - > "+ tokenDao.findByToken(tokenname).getToken());
-		
+
 		return tokenDao.findByToken(tokenname);
 	}
+
 	@Override
 	public String deleteTokenByTokenName(String token) {
 		TblTokens tokenObject = tokenDao.findByToken(token);
-		if( tokenObject != null ) {
-			tokenDao.deleteById(tokenObject.getId());;
-		}else {
+		if (tokenObject != null) {
+			tokenDao.deleteById(tokenObject.getId());
+			;
+		} else {
 			return "token doesn't exist";
 		}
 		return "deleted";
 	}
-	
+
+	@Override
+	public ApiResponse<Boolean> checkLogin(String token) {
+		ApiResponse<Boolean> response;
+		try {
+			TblTokens tok = findTokenByName(token);
+			Boolean result;
+			if (!tok.getToken().isEmpty()) {
+				result = true;
+			} else {
+				result = false;
+			}
+			response = new ApiResponse<Boolean>(HttpStatus.OK.value(), HttpStatus.OK, result);
+		} catch (Exception e) {
+			response = new ApiResponse<Boolean>(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST, false);
+		}
+		return response;
+	}
 
 }

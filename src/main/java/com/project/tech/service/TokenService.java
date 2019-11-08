@@ -12,5 +12,7 @@ public interface TokenService {
 	
 	String deleteTokenByTokenName(String token);
 	
+	ApiResponse<Boolean> checkLogin(String token);
+	
 	
 }
