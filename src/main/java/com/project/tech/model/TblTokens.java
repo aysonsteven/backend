@@ -17,7 +17,7 @@ public class TblTokens {
     @Column(name="record_id")
     private int id;
     
-    @Column(name="token")
+    @Column(name="token", unique = true)
     private String token;
     
     @Column(name="date_created")

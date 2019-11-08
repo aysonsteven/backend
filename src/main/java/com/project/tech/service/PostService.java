@@ -7,6 +7,8 @@ import com.project.tech.model.TblPosts;
 
 public interface PostService {
 	
-	ApiResponse<List<TblPosts>> findAllPost();
+	ApiResponse<List<TblPosts>> findAllPost(String token);
+	
+	ApiResponse<List<TblPosts>> findPostByConfigId(int configId);
 
 }

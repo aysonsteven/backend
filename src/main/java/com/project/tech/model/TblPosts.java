@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +16,7 @@ public class TblPosts {
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="record_id")
-    private int id;
+    private Integer id;
 	
 	@Column(name="record_content")
 	private String content;
@@ -26,16 +28,16 @@ public class TblPosts {
 	private int configId;
 	
 	@Column(name="parent_id")
-	private int parentId;
+	private Integer parentId;
 	
 	@Column
 	private int depth;
-
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,11 +65,11 @@ public class TblPosts {
 		this.configId = configId;
 	}
 
-	public int getParentId() {
+	public Integer getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 

@@ -38,9 +38,8 @@ public class TokenServiceImpl implements TokenService {
 	public TblTokens findTokenByName(String tokenname) {
 		System.out.println("tokitok -> " + tokenname);
 
-//		System.out.println("TOKEN - > "+ tokenDao.findByToken(tokenname).getToken());
 
-		return tokenDao.findByToken(tokenname);
+		return tokenDao.findByToken(tokenname.replaceAll("Bearer ", ""));
 	}
 
 	@Override
@@ -57,11 +56,13 @@ public class TokenServiceImpl implements TokenService {
 
 	@Override
 	public ApiResponse<Boolean> checkLogin(String token) {
+		TblTokens tok = findTokenByName(token);
+		System.out.println("token " + tok);
 		ApiResponse<Boolean> response;
 		try {
-			TblTokens tok = findTokenByName(token);
+	
 			Boolean result;
-			if (!tok.getToken().isEmpty()) {
+			if (tok.getToken() != null) {
 				result = true;
 			} else {
 				result = false;
