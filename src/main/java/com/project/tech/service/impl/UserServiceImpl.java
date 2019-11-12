@@ -12,10 +12,10 @@ import com.project.tech.service.UserService;
 
 import jar.security.config.JwtTokenUtil;
 
-import org.hibernate.annotations.ResultCheckStyle;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
