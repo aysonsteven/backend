@@ -21,4 +21,6 @@ public interface UserService {
     UserDto update(UserDto userDto);
     
     ApiResponse<AuthToken> login(LoginUser loginUser);
+    
+    ApiResponse<String>logout(String token);
 }

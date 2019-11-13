@@ -1,11 +1,13 @@
 package com.project.tech.service.impl;
 
+import com.project.tech.dao.TokenDao;
 import com.project.tech.dao.UserDao;
 import com.project.tech.dto.ApiResponse;
 import com.project.tech.dto.AuthToken;
 import com.project.tech.dto.LoginUser;
 import com.project.tech.dto.TokenDto;
 import com.project.tech.dto.UserDto;
+import com.project.tech.model.TblTokens;
 import com.project.tech.model.TblUser;
 import com.project.tech.service.TokenService;
 import com.project.tech.service.UserService;
@@ -15,7 +17,7 @@ import jar.security.config.JwtTokenUtil;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +30,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
 @Component
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
@@ -108,5 +112,17 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 		ApiResponse<String> result = tokenService.inserTokens(tokenObject, user.getId());
 		return new ApiResponse<AuthToken>(result.getStatus(), result.getMessage(),
 				new AuthToken(token, loginUser.getUsername()));
+	}
+
+	@Override
+	public ApiResponse<String> logout(String token) {
+		String response;
+		System.out.println("checktoken" + token);
+		try {
+			response = tokenService.deleteTokenByTokenName(token);
+		} catch (Exception e) {
+			response = e.getMessage();
+		}
+		return new ApiResponse<String>(HttpStatus.OK.value(), HttpStatus.OK, response);
 	}
 }

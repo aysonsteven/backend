@@ -45,10 +45,9 @@ public class AuthenticationController {
 		return userService.login(loginUser);
 	}
 	
-	@DeleteMapping("/logout")
+	@PostMapping("/logout")
 	public ApiResponse<String> logout(@RequestHeader(value="Authorization") String token){
-		String tokenObject = tokenService.deleteTokenByTokenName(token.replaceAll("Bearer ", ""));
-		return new ApiResponse<>(HttpStatus.OK.value(), HttpStatus.OK , tokenObject);
+		return userService.logout(token);
 	}
 	
 	@GetMapping("/checklogin")

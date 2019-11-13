@@ -44,7 +44,7 @@ public class TokenServiceImpl implements TokenService {
 
 	@Override
 	public String deleteTokenByTokenName(String token) {
-		TblTokens tokenObject = tokenDao.findByToken(token);
+		TblTokens tokenObject = tokenDao.findByToken(token.replaceAll("Bearer ", ""));
 		if (tokenObject != null) {
 			tokenDao.deleteById(tokenObject.getId());
 			;
@@ -57,7 +57,6 @@ public class TokenServiceImpl implements TokenService {
 	@Override
 	public ApiResponse<Boolean> checkLogin(String token) {
 		TblTokens tok = findTokenByName(token);
-		System.out.println("token " + tok);
 		ApiResponse<Boolean> response;
 		try {
 	
